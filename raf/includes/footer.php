@@ -1,0 +1,4 @@
+<?php ?>
+<div id="footer">
+	<div id="thanks">By Will, Ray, and Raf with special thanks to Tim for building the site.</div>
+	</div>

@@ -1,0 +1,49 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	
+	# Some sort of broken clickfraud hack
+	RewriteRule ^doubleclick/DARTIframe.html - [F]
+	
+	# NO "www."
+	#RewriteCond %{HTTP_HOST} !^thedoghousediaries.com
+	#RewriteRule (.*) http://thedoghousediaries.com/$1 [L]
+	
+	RewriteCond %{REQUEST_FILENAME} -f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^\.]+)$ $1.php [NC,L]
+	
+	# Rewrite /?p=0001 to /0001
+	RewriteCond %{QUERY_STRING} ^p=([0-9]*)$
+	RewriteRule .*$ /%1? [R=301,L]
+	
+	# Rewrite /?page_id=0001 to /0001
+	RewriteCond %{QUERY_STRING} ^page_id=([0-9]*)$
+	RewriteRule .*$ /%1? [R=301,L]
+	
+	#Rewrite /?feed=rss2 to /feed
+	RewriteCond %{QUERY_STRING} ^feed=rss2$
+	RewriteRule ^$ /feed? [R=301,L]
+
+	RewriteCond %{REQUEST_URI} ^/?about
+	RewriteRule ^.*$ about.php [L]
+	
+	RewriteCond %{REQUEST_URI} ^/?archive
+	RewriteRule ^.*$ archive.php [L]
+
+	RewriteCond %{REQUEST_URI} ^/?dhdadmin
+	RewriteRule ^.*$ dhdadmin.php [L]
+
+	RewriteCond %{REQUEST_URI} ^/?dhdlogin
+	RewriteRule ^.*$ dhdlogin.php [L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)$ index.php?t=$1
+	
+	#RewriteCond %{REQUEST_FILENAME} !-d 
+	#RewriteCond %{REQUEST_FILENAME}\.php -f 
+	#RewriteRule ^(.*)$ $1.php [NC]
+
+</IfModule>
+<IfModule !mod_rewrite.c>
+	ErrorDocument 404 /error.php
+</IfModule>

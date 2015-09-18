@@ -1,0 +1,179 @@
+* { padding: 0; margin: 0; }
+
+#logout:link {color:#000000;}      /* unvisited link */
+#logout:visited {color:#000000;}  /* visited link */
+#logout:hover {color:#000000;}  /* mouse over link */
+#logout:active {color:#000000;}  /* selected link */ 
+
+ table.allcomics { 
+   font-family: verdana, arial, helvetica, sans-serif;
+   font-size: 11px;
+   cellspacing: 0; 
+   border-collapse: collapse; 
+   width: 883px;    
+   }
+ table.allcomics td { 
+   /*
+   border-left: 1px solid #999; 
+   border-top: 1px solid #999;
+   */
+   padding: 2px 4px;
+   }
+ table.allcomics tr:first-child td {
+   border-top: none;
+ }
+ table.allcomics th { 
+   /*border-left: 1px solid #999; */
+   padding: 2px 4px;
+   background: #E5E5E5;
+   color: #444444;
+   font-variant: small-caps;
+   }
+ table.allcomics td { overflow: hidden; }
+ 
+ div.scrollableContainer { 
+   background: #E5E5E5;
+   position: relative; 
+   width: 900px; 
+  /* padding-top: 1em; */
+   padding-top: 19px;
+   margin: 20px 1px 20px 20px;    
+   /*border: 1px solid #999;*/
+   /*background: #6b6164;*/
+   }
+ div.scrollingArea { 
+ 
+   height:auto;
+min-height:30px;
+height:auto !important;        /* for IE as it does not support min-height */
+/*height:30px;*/
+max-height:250px;
+   /*height: 250px; */
+   overflow: auto; 
+   overflow-y: scroll;
+   }
+
+ table.scrollable thead tr {
+   left: -1px; top: 0;
+   position: absolute;
+   }
+
+ table.allcomics .comid	  div { width: 50px;text-align:left;text-align:center; }
+ table.allcomics .comtitle   div { width: 400px;text-align:left; }
+ table.allcomics .comdate div { width: 198px;text-align:left; }
+ table.allcomics .comstat div { width: 200px;text-align:left; }
+ /*
+ table.allcomics td.comid    { } 
+ table.allcomics td.comtitle 	{ } 
+ table.allcomics td.comalttext { }
+ */
+
+a {
+	outline: 0;
+}
+td {
+	padding:10px;
+}
+.tablerow{
+	height:60px;
+}
+.altrow{
+	background:#BBDDFF;
+}
+.pendingrow{
+	background:#FEC9C1;
+}
+.mainrow{
+	background:#FFFFFF;
+}
+.headerrow{
+	font-weight:bold;
+	background:#E5E5E5;
+}
+.header{
+	font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+	font-size:30px;
+	font-weight:bold;
+	float:left;
+	margin-left:50px;
+	margin-top:50px;
+	width:1000px;
+}
+.fielddivs{
+	width:100%; 
+	height:auto; 
+	overflow:hidden; 
+	margin-bottom:20px;
+}
+
+.userinputs{
+	width:280px; 
+	float:left;
+}
+.userdivs{
+	float: left;
+	padding-right: 10px;
+	padding-top: 2px;
+	text-align: right;
+	width: 120px;
+}
+
+.passwordinputs{
+	width:180px; 
+	float:left;
+}
+.passworddivs{
+	float: left;
+	padding-right: 10px;
+	padding-top: 2px;
+	text-align: right;
+	width: 230px;
+}
+
+.fieldinputs{
+	width:500px; 
+	float:left;
+}
+.labeldivs{
+	float: left;
+	padding-right: 10px;
+	padding-top: 2px;
+	text-align: right;
+	width: 140px;
+}
+.uploadbtn {
+	font-size: 12px;
+	font-weight: bold;
+	height: 40px;
+	width: 200px;
+}
+.passbtn{
+	font-size: 14px !important;
+	height: 35px;
+	width: 145px;
+}
+.updateuserbtn{
+	font-size: 14px !important;
+	height: 35px;
+	width: 70px;
+}
+.createuserbtn {
+	font-size: 17px !important;
+	height: 35px;
+	width: 150px;
+}
+input[type=button], input[type=submit] {
+	background-color: #7A7A7A;
+	border: medium none;
+	color: #EDEDED;
+	font-family: Monaco,Consolas,"Lucida Console",monospace;
+	margin-top: 5px;
+	text-align: center;
+	border-radius:4px;
+}
+input[type=button]:hover, input[type=submit]:hover {
+	background-color :#AFAFAF;
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	box-shadow: 0 0 1px rgba(0,0,0, .75);
+}

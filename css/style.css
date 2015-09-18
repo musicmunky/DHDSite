@@ -1,0 +1,666 @@
+/* CURRENT STYLESHEET */
+* {
+	font-family: "helvetica", "arial", sans-serif;
+	color: #424242;
+}
+body {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	background-color: #F6F7F8;
+}
+#topAd {
+	width: 728px;
+	margin: 15px auto 35px auto;
+	height:90px;
+}
+#bannerTop {
+	height: 50px;
+	width: 850px;
+	margin: 10px auto 0px auto;
+	position: relative;
+	top: 5px;
+	webkit-box-sizing: border-box;
+       moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+@media only screen and (max-device-width: 480px) {
+#bannerTop {
+	height: auto;
+}
+}
+#logoSpace {
+	width: 400px;
+	float: left;
+}
+@media only screen and (max-device-width: 480px) {
+#logoSpace {
+	width: 600px;
+	margin: auto;
+}
+}
+#logo {
+	max-width: 100%;
+	height: auto;
+	opacity: .9;	
+}
+#menu {
+	width: 220px;
+	height: 42px;
+	float: right;
+	webkit-box-sizing: border-box;
+       moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+@media only screen and (max-device-width: 480px) {
+#menu {
+	width: 800px;
+	margin: 20px auto;
+}
+}
+a.menuLinks {
+	font-size: 14px;
+	text-decoration:none;
+	font-weight: bold;
+	opacity: .9;
+	margin:.8em .8em;
+	font-family: "helvetica", "arial", sans-serif;
+}
+@media only screen and (max-device-width: 480px) {
+a.menuLinks {
+	font-size: 30px;
+}
+}
+a.menuLinks:hover {
+	text-decoration: underline;
+}
+#fb-tw-rss {
+	float: right;
+	position: relative;
+	right: 1px;
+}
+.fb-tw-rss-container {
+	width: 38px;
+	float: left;
+	margin-left: 5px;
+}
+@media only screen and (max-device-width: 480px) {
+.fb-tw-rss-container {
+	width: 50px;
+}
+}
+.fb-tw-rss-icon {
+	max-width: 100%;
+	height: auto;
+	border-radius: 1px;
+}
+.fb-tw-rss-icon:hover {	
+	opacity: .8;
+}
+ul {					
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	list-style-type:none;
+	text-align: center;
+	display: inline-block;
+}
+li {
+	display:inline;
+}
+#announcements {
+	width: 500px;
+	margin: 20px auto;
+	background-color: rgba(244,179,71, .3);
+	padding: 15px;
+	text-align: center;
+	font-size: 12px;
+  	webkit-box-sizing: border-box;
+       moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+a.comicnavlinks {
+	border: 1px solid #88D8D8;
+	background-color: #88D8D8;
+	margin: 0px 5px;
+	color: white;
+	display: inline-block;
+	vertical-align: top;
+	width: 35px;
+	text-decoration:none;
+	padding:0.5em;
+	font-family: "helvetica", "arial", sans-serif;
+	font-size: 14px;
+	border-radius: 3px;
+  	webkit-box-shadow: 0px 2px 0px #ccc;
+       moz-box-shadow: 0px 2px 0px #ccc;
+           box-shadow: 0px 1px 0px #ccc;
+}
+@media only screen and (max-device-width: 480px) {
+a.comicnavlinks {
+	width: 100px;
+	height: 75px;
+	background-color: white;
+	border: white;
+	color: #88D8D8;
+	font-size: 50px;
+	font-weight: bold;
+  	webkit-box-shadow: 0px 0px 0px white;
+       moz-box-shadow: 0px 0px 0px white;
+           box-shadow: 0px 0px 0px white;
+}
+}
+a.comicnavlinks:hover {
+	opacity: .9;
+	color: white;
+	position: relative;
+	top: 1px;
+  	webkit-box-shadow: 0px 0px 0px #ccc;
+       moz-box-shadow: 0px 0px 0px #ccc;
+           box-shadow: 0px 0px 0px #ccc;
+}
+#topNav {
+	height: 32px;
+	width: 100%;
+	padding: 20px 0px;	
+}
+@media only screen and (max-device-width: 480px) {
+#topNav {
+	display: none;
+}
+}
+#bottomNav {
+	height: 32px;
+	width: 100%;
+	padding: 20px 0px;		
+}
+@media only screen and (max-device-width: 480px) {
+#bottomNav {
+	height: 120px;
+}
+}
+.clear {
+	clear:both;
+}
+/***************/
+/*BEGIN SIGNOFF*/
+/***************/
+#signoff-wrapper {
+	height: auto;
+	width: 850px;
+	margin: 40px auto;
+	webkit-box-sizing: border-box;
+       moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+#title-signoff-share {
+	width: 600px;
+	height: auto;
+	margin: auto;
+	text-align: center;
+	background-color: #eee;
+	padding: 30px 30px 20px 30px;
+}
+#titleheader {
+	width: 600px;
+	margin-top: 0px;
+	webkit-box-sizing: border-box;
+       moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+@media only screen and (max-device-width: 480px) {
+#titleheader {
+	font-size: 42px;
+}
+}
+.textfields {
+	margin: 10px 10px 10px 10px;
+	font-size: 14px;
+	color: #424242;
+}
+#subtext {
+	width: 600px;
+	margin-bottom: 40px;
+	font-size: 15px;
+	webkit-box-sizing: border-box;
+       moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+@media only screen and (max-device-width: 480px) {
+#subtext {
+	font-size: 30px;
+}
+}
+#subtext > a:link {
+	text-decoration: underline;
+	color: #0000EE;
+}
+#subtext > a:visited { 
+	color: #551A8B; 
+}
+#alttext {
+	width: 600px;
+	margin-bottom: 40px;
+	font-size: 15px;
+}
+.mobile-only {
+	display: none;
+}
+@media only screen and (max-device-width: 480px) {
+.mobile-only {
+	display: inline;
+	font-size: 30px;
+}
+}
+#permalink {
+	margin-bottom:20px;
+	font-size:13px;
+	color: #424242;
+	opacity: .7;
+}
+#permalink > a:link {
+	text-decoration: none;
+	color: #424242;
+	opacity: .7;
+}
+#permalink > a:visited { 
+	color: #424242;
+	opacity: .7;
+}
+.addthis_native_toolbox {
+	max-width: 600px;
+	height: 25px;
+	position: relative;
+	left: 25px;
+}
+.addthis_button_google_plusone.at300b {
+	position: relative;
+	left: -10px;
+}
+.addthis_button_pinterest_pinit.at300b {
+	position: relative;
+	left: -25px;
+}
+.addthis_counter.addthis_pill_style {
+	position: relative;
+	left: -30px;
+}
+
+/*************/
+/*END SIGNOFF*/
+/*************/
+
+/**************/
+/*BEGIN FOLLOW*/
+/**************/
+#follow-wrapper {
+	width: 625px;
+	margin: auto;
+	height: auto;
+}
+#follow {
+	width: 625px;
+	height: auto;
+	margin: auto; 
+	padding: 40px 0px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	float: left;
+}
+.button {
+	display: inline-block;
+	margin: 0px 20px;
+}
+#fb-button {
+	float: left;
+	position: relative;
+	top: -9px;
+	left: 10px;
+	height: 50px;
+	width: 200px;
+}
+#forekast-button {
+	height: 50px;
+	background: #3e4252;	
+	border-radius: 5px;
+	float: left;
+}
+#forekast-button:hover {
+	opacity: .9;	
+}
+#forekast-logo-white {
+	width: auto;
+	height: 100%;
+}
+#patreon-button-wrapper {
+	float: left;
+	height: 75px;
+	margin: -12px 0px 0px 20px;
+}
+	#patreon-button {
+		height: 100%;
+		width: auto;
+	}
+
+/* BEGIN POPUP DIV */
+#twitter-button-wrapper {
+	float: left;
+	height: 50px;
+}
+	#twitter-button {
+		height: 100%;
+		width: auto;
+		border-radius: 5px;
+	}
+	#twitter-button:hover {
+		opacity: .8;
+	}
+#popup-follow {
+	position: absolute;
+	display: none;
+	margin: -210px 0px 0px 630px;
+	z-index: 10;
+	padding: 10px;
+	width: 250px;
+	background-color:rgba(0, 0, 0, 0.1);
+	webkit-box-shadow: 0px 0px 5px #aaa;
+       moz-box-shadow: 0px 0px 5px #aaa;
+           box-shadow: 0px 0px 5px #aaa;
+}
+	.willrayraf {
+		width: 250px;
+		height: 50px;
+		margin: 5px;
+		float: left;
+	}
+		.twitter-profile {
+			border-radius: 5px;
+			float: left;
+		}
+		.twitter-follow-button {
+			padding: 10px 0px 0px 10px;
+		}
+		#twitter-widget-0.twitter-follow-button {
+			float: left;
+			margin-top: 4px;
+		}
+		#twitter-widget-1.twitter-follow-button {
+			float: left;
+			margin-top: 4px;
+		}
+		#twitter-widget-2.twitter-follow-button {
+			float: left;
+			margin-top: 4px;
+		}
+		#twitter-widget-3.twitter-follow-button {
+			float: left;
+			margin-top: 4px;
+		}
+		.twitter-handle {
+			float: left;
+			margin: 17px 0px 0px 5px;
+		}
+/* END POPUP DIV */
+
+/************/
+/*END FOLLOW*/
+/************/
+#popular {
+	width: 625px;
+	text-align: center;
+	margin: 40px auto;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 40px;
+	font-size: 14px;
+}
+#popular > ul > li {
+	display: block;
+	margin: 3px 0px;
+}
+#popular > ul > li > a {
+	text-decoration: none;
+}
+#popular > ul > li > a:hover {
+	text-decoration: underline;
+}
+#middleAd {
+	width: 728px;
+	margin: 40px auto;
+	height:90px;
+}
+#bottomAd {
+	width: 728px;
+	margin: 40px auto;
+	height:90px;
+}
+#footer {
+	width: 850px;
+	text-align: center;
+	margin: 10px auto;
+}
+#thanks {
+	font-size: 11px;
+	font-weight: normal;
+}
+.mainloginclass{
+	width: 350px; 
+	margin: 200px auto 0 auto;
+	text-align:center;
+}
+.login{
+	width:100%;
+	height:160px;
+	background-color:#EDEDED;
+	padding-top:20px;
+	border-radius:8px;
+	border: 1px solid #aaa;
+	-webkit-box-shadow: 0px 0px 10px #bbb;
+	-moz-box-shadow: 0px 0px 10px #bbb;
+	box-shadow: 0px 0px 10px #bbb;
+	font-family: Monaco, Consolas, "Lucida Console", monospace;
+	font-weight:bold;
+}
+.inputdivs{
+	width:100%;
+	text-align:center;
+	margin-top:15px;
+}
+.loginbtn {
+	background-color: #88D8D8;
+	border: medium none;
+	color: #EDEDED;
+	font-family: Monaco,Consolas,"Lucida Console",monospace;
+	font-size: 12px;
+	font-weight: bold;
+	height: 25px;
+	margin-top: 5px;
+	text-align: center;
+	width: 140px;
+	border-radius:4px;
+}
+.loginbtn:hover{
+	opacity: .8;
+}
+.logintxt{	
+	border: medium none;
+	color: #5F5F5F;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	height: 25px;
+	text-align: center;
+	width: 170px;
+}
+input:focus {
+	outline: none; 
+}
+
+td {
+	padding: 5px 75px 0px 10px;
+	font-size: 12px;
+}
+span {
+	font-size: 14px;
+}
+.entry {
+	margin-top: 30px;
+}
+.pageTitle {
+	font-size: 30px;
+	text-align: center;
+	margin: auto;
+}
+
+/***********************************************************/
+/* CSS FOR THE MAIN CONTENT DIV ON EACH PAGE (THE BIG BOX) */
+/***********************************************************/
+#maincontent {
+	height: auto;
+	margin: 0px auto;
+	background-color: white;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	webkit-box-sizing: border-box;
+       moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+/************************/
+/* BEGIN COMIC PAGE CSS */
+/************************/
+.comic {
+	width: 850px;
+	margin: 0px auto;
+}
+#imgdiv {
+	width: 800px;
+	margin: auto;
+}
+#comicimg {
+	max-width: 100%;
+	height: auto;
+}
+@media only screen and (max-device-width: 480px) {
+.comic {
+	padding-top: 20px;
+}
+}
+/**********************/
+/* END COMIC PAGE CSS */
+/**********************/
+
+
+/***************************/
+/* BEGIN ABOUT US PAGE CSS */
+/***************************/
+#maincontent.aboutUs {
+	width: 850px;
+	margin: 0px auto 40px auto;
+	text-align: left;
+	padding: 25px;
+}
+#maincontent.aboutUs a:link {
+	text-decoration: underline;
+	color: #0000EE;
+}
+#maincontent.aboutUs a:visited { 
+	color: #551A8B; 
+}
+/*************************/
+/* END ABOUT US PAGE CSS */
+/*************************/
+
+
+/**************************/
+/* BEGIN ARCHIVE PAGE CSS */
+/**************************/
+#maincontent.archiveTable {
+	width: 850px;
+	margin: 0px auto 40px auto;
+	text-align: center;
+	padding: 25px;
+}
+.archiveTable a {
+	text-decoration: none;
+}
+.archiveTable a:hover {
+	text-decoration: underline;
+}
+.archiveTable div {
+	/*margin: 20px auto 20px auto;*/
+	margin-top:20px;
+	padding-top:15px;
+	border-top:1px solid #D6D6D6;
+	margin-left:auto;
+	margin-right:auto;
+}
+#toTop {
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    width: 64px;
+    height: 64px;
+    background-image: url('../logos/up.png');
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+#toTop:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+/************************/
+/* END ARCHIVE PAGE CSS */
+/************************/
+
+/*****************************/
+/* BEGIN CONTACT US PAGE CSS */
+/*****************************/
+#maincontent.contact {
+	width: 850px;
+	margin: 0px auto 40px auto;
+	text-align: left;
+	padding: 25px;
+}
+#contact-div {
+	margin: 20px auto 0px auto;
+}
+.contact-list {
+	list-style-type:none;
+	text-align: center;
+	display: block;
+	margin: 10px;
+}
+.contact-list a {
+	text-decoration: none;
+}
+.contact-list a:link {
+	text-decoration: underline;
+	color: #0000EE;
+}
+.contact-list a:visited { 
+	color: #551A8B; 
+}
+.contact-list a:hover {
+	text-decoration: underline;
+}
+/***************************/
+/* END CONTACT US PAGE CSS */
+/***************************/
+
+/************************/
+/* BEGIN STORE PAGE CSS */
+/************************/
+#maincontent.store {
+	width: 850px;
+	margin: 0px auto 40px auto;
+	text-align: left;
+	padding: 25px;
+}
+.store-text {
+	margin: auto;
+	text-align: center;
+	margin: 20px;
+}
+/***********************/
+/* END STORE PAGE CSS */
+/***********************/
