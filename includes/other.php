@@ -13,12 +13,11 @@
 		<li><a href="http://thedoghousediaries.com/5731">How To Lose Friends Playing Catan</a></li>
 		<li><a href="http://thedoghousediaries.com/4639">The Science of Dogs</a></li>
 		<li><a href="http://thedoghousediaries.com/5697">When It Is Acceptable To Take A Selfie</a></li>
-		<li><a href="http://thedoghousediaries.com/5636">Things I Would Wish Upon My Enemies</a></li>	
+		<li><a href="http://thedoghousediaries.com/5636">Things I Would Wish Upon My Enemies</a></li>
 		<li><a href="http://thedoghousediaries.com/3586">Bed Cartography</a></li>
 		<li><a href="http://thedoghousediaries.com/3266">What Your Toilet Paper Says About You</a></li>
 		<li><a href="http://thedoghousediaries.com/5053">What Your Coffee Says About You</a></li>
 		<li><a href="http://thedoghousediaries.com/4491">How To Fold Fitted Sheets</a></li>
 		<li><a href="http://thedoghousediaries.com/1321">Why You Are Not As Awesome As A Dog</a></li>
-		
 	<ul>
 </div>

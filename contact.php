@@ -15,7 +15,7 @@
 				<li class="contact-list">Will <a target="_blank" href="https://twitter.com/willsamari">@willsamari</a></li>
 				<li class="contact-list">Ray <a target="_blank" href="https://twitter.com/rayyamartino">@rayyamartino</a></li>
 				<li class="contact-list">Raf <a target="_blank" href="https://twitter.com/rafaan">@rafaan</a></li>
-				<li class="contact-list">For site questions, contact Tim <a href="https://twitter.com/sixfivebeastman" target="_blank">@sixfivebeastman</a></li>
+				<li class="contact-list">For site questions, contact Tim <a href="https://twitter.com/musicmunky80" target="_blank">@musicmunky80</a></li>
 			</ul>
 		</div>
 	</body>

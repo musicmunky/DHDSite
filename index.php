@@ -25,9 +25,9 @@
 		$html = getComic($t);
 		/*if($use_ajax)
 		{
-			$html = getAjaxComic(array( "firstload" => 1, 
-										"method" 	=> 'getAjaxComic', 
-										"libcheck" 	=> true, 
+			$html = getAjaxComic(array( "firstload" => 1,
+										"method" 	=> 'getAjaxComic',
+										"libcheck" 	=> true,
 										"value" 	=> $t));
 		}
 		else
