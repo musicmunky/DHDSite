@@ -538,6 +538,9 @@ span {
 	max-width: 100%;
 	height: auto;
 }
+.imgcomic {
+    width:100%;
+}
 @media only screen and (max-device-width: 480px) {
 .comic {
 	padding-top: 20px;

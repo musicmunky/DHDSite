@@ -177,7 +177,7 @@
 
 			$name = "dhdcomics/" . $name;
 			$titletext = isset($hover['meta_value']) ? htmlentities($hover['meta_value'], ENT_QUOTES) : htmlentities($comic['post_title'], ENT_QUOTES);
-			$comichtml = "<img id='comicimg' src='" . $name . "' title='" . $titletext . "' class=''>";
+			$comichtml = "<img id='comicimg' src='" . $name . "' title='" . $titletext . "' class='imgcomic'>";
 			$title = isset($comic['post_title']) ? $comic['post_title'] : "";
 			$subtext = isset($comic['post_content']) ? $comic['post_content'] : "";
 			$permalink = "Permalink: <a target='_blank' href='" . $webaddress . $comic['ID'] . "'>" . $webaddress . $comic['ID'] . "</a>";
@@ -185,7 +185,7 @@
 		}
 		else
 		{
-			$comichtml = "<img id='comicimg' src='dhdcomics/obiwan.jpg' title='Hokey religions and ancient weapons are no match for a good webcomic in your browser...'>";
+			$comichtml = "<img id='comicimg' src='dhdcomics/obiwan.jpg' title='Hokey religions and ancient weapons are no match for a good webcomic in your browser...' class='imgcomic'>";
 			$title = "Move along...";
 			$subtext = "Without precise calculations we could fly right through a popup or bounce too close to a supernova, and that'd end your trip real quick, wouldn't it?";
 			$name = "";
@@ -313,7 +313,7 @@
 
 			$name = "dhdcomics/" . $name;
 			$titletext = isset($hover['meta_value']) ? htmlentities($hover['meta_value'], ENT_QUOTES) : htmlentities($comic['post_title'], ENT_QUOTES);
-			$comichtml = "<img src='" . $name . "' title='" . $titletext . "'>";
+			$comichtml = "<img src='" . $name . "' title='" . $titletext . "' class='imgcomic'>";
 			$title = isset($comic['post_title']) ? $comic['post_title'] : "";
 			$subtext = isset($comic['post_content']) ? $comic['post_content'] : "";
 			$permalink = "Permalink: <a target='_blank' href='" . $webaddress . $comic['ID'] . "'>" . $webaddress . $comic['ID'] . "</a>";
@@ -323,7 +323,7 @@
 			foreach (glob("dhdcomics/" . $name . "*") as $c)
 			{
 				$titletext = isset($hover['meta_value']) ? htmlentities($hover['meta_value'], ENT_QUOTES) : $comic['post_title'];
-				$comichtml = "<img src='" . $c . "' title='" . $titletext . "'>";
+				$comichtml = "<img src='" . $c . "' title='" . $titletext . "' class='imgcomic'>";
 				$title = isset($comic['post_title']) ? $comic['post_title'] : "";
 				$subtext = isset($comic['post_content']) ? $comic['post_content'] : "";
 			}

@@ -41,12 +41,13 @@
 				"status"	=> "NO COMIC",
 				"message"	=> "NO COMIC MESSAGE",
 				"content"	=> array(
-						"comic"	  => "<img id='comicimg' src='dhdcomics/obiwan.jpg' title='Hokey religions and ancient weapons are no match for a good webcomic in your browser...'>",
+						"comic"	  => "<img id='comicimg' src='dhdcomics/obiwan.jpg' title='Hokey religions and ancient weapons are no match for a good webcomic in your browser...' class='imgcomic'>",
 						"title"   => "Move along...",
 						"subtxt"  => "Without precise calculations we could fly right through a popup or bounce too close to a supernova, and that'd end your trip real quick, wouldn't it?",
 						"alttext" => "Hokey religions and ancient weapons are no match for a good webcomic in your browser...",
 						"permlnk" => "",
-						"comid"   => ""
+						"comid"   => "",
+                        "name"    => ""
 				)
 			);
 	}
@@ -73,7 +74,7 @@
 		<!-- ADDTHIS BUTTONS -->
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5209d6d50eb2bafe&domready=1"></script>
 
-		<!-- TWITTER FOLLOW BUTTON -->	
+		<!-- TWITTER FOLLOW BUTTON -->
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		<!-- END SOCIAL MEDIA SHARING BUTTONS -->
 
@@ -85,7 +86,7 @@
 		<?php include "includes/header.php"; ?>
 
 		<div id="maincontent" class="comic">
-			<?php if ($announce['content']['active'] == 1): ?> 
+			<?php if ($announce['content']['active'] == 1): ?>
 				<div id="announcements">
 					<div id="announcediv" class="textfields">
 						<?php echo $announce['content']['text']; ?>

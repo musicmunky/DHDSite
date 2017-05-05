@@ -5,13 +5,13 @@
 <div id="follow-wrapper">
 	<div id="follow">
 		<div id="forekast-button" class="button">
-			<a href="http://forekast.com"><img id="forekast-logo-white" src="../logos/forekast-logo-white.png"></a>
+			<a href="http://forekast.com" target="_blank"><img id="forekast-logo-white" src="../logos/forekast-logo-white.png"></a>
 		</div>
 		<div id="fb-button" class="button">
 			<iframe frameborder="0" allowtransparency="true" style="border:none; overflow:hidden; width:200px; height:65px;" scrolling="no" src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fthedoghousediaries&width&height=62&colorscheme=light&show_faces=false&header=false&stream=false&show_border=false&appId=489068647866484"></iframe>
 		</div>
 		<div id="patreon-button-wrapper" class="button">
-			<a href="http://www.patreon.com/doghouse"><img id="patreon-button" src="../logos/patreon_big.png"></a>
+			<a href="http://www.patreon.com/doghouse" target="_blank"><img id="patreon-button" src="../logos/patreon_big.png"></a>
 		</div>
 		<!-- <div id="twitter-button-wrapper" class="button">
 			<input type="image" id="twitter-button" value="Follow us on Twitter!" src="../logos/twitter-follow.png" onmousedown="showDiv()" />
