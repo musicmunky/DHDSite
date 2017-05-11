@@ -1,12 +1,74 @@
-<?php 
+<?php
+/*
 	define('INCLUDE_CHECK',true);
-	require 'tim/php/connect.php';
+	require 'php/connect.php';
+
+    $aPostData = array();
+    $qPosts = mysql_query("SELECT * FROM posts ORDER BY ID;");
+
+    while($row = mysql_fetch_assoc($qPosts))
+    {
+        $aPost = array(
+            "post_id"           => $row['ID'],
+            "post_author"       => $row['post_author'],
+            "post_date"         => $row['post_date'],
+            "post_date_gmt"     => $row['post_date_gmt'],
+            "post_content"      => $row['post_content'],
+            "post_title"        => $row['post_title'],
+            "post_status"       => $row['post_status'],
+            "post_name"         => $row['post_name'],
+            "post_modified"     => $row['post_modified'],
+            "post_modified_gmt" => $row['post_modified_gmt'],
+            "post_parent"       => $row['post_parent'],
+            "guid"              => $row['guid'],
+            "post_type"         => $row['post_type'],
+            "post_live_date"    => $row['post_live_date']
+        );
+
+        $qMeta = mysql_query("SELECT * FROM postmeta WHERE post_id='" . $row['ID'] . "';");
+        $aMeta = array("comic_description" => "", "comic_file" => "", "comic_large" => "", "comic_medium" => "", "comic_small" => "");
+
+        while($meta_row = mysql_fetch_assoc($qMeta))
+        {
+            switch($meta_row['meta_key'])
+            {
+                case 'comic_description':
+                    $aMeta['comic_description'] = $meta_row['meta_value'];
+                    break;
+                case 'comic_file':
+                    $aMeta['comic_file'] = $meta_row['meta_value'];
+                    break;
+                case 'comic_large':
+                    $aMeta['comic_large'] = $meta_row['meta_value'];
+                    break;
+                case 'comic_medium':
+                    $aMeta['comic_medium'] = $meta_row['meta_value'];
+                    break;
+                case 'comic_small':
+                    $aMeta['comic_small'] = $meta_row['meta_value'];
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        $aPost['post_meta'] = $aMeta;
+
+        $aPostData[$row['ID']] = $aPost;
+    }
+
+    $sPostData = json_encode($aPostData);
+
+    echo file_put_contents("dhd_db_data_" . time() . ".json", $sPostData);
+*/
+
+
 
 	//$d = strtotime("2014-05-12");
 	//$golivedate  = date('Y-m-d H:i:s', $d);
-	
+
 	//echo "GOLIVE IS: " . $golivedate;
-	
+
 	//$np = "Password99";
 	//$updatepass = mysql_query("UPDATE dhdadmins SET dhdpass='" . md5($np) . "' WHERE ID=6;");
 /*
@@ -18,7 +80,7 @@
 	$newuser = mysql_query("INSERT INTO eventadmin (USER, FIRST, LAST, EMAIL, PASSWORD) 
 							VALUES ('" . $username . "', '" . $first . "', '" . $last . "', '" . $email . "', '" . $password . "');");
 */
-/*	
+/*
 	$password = md5("Password99");
 	$username = "ranvari";
 	$first = "Rafaan";
@@ -32,45 +94,38 @@
 	$userid = 1;
 	$checkpass = mysql_fetch_assoc(mysql_query("SELECT ID FROM dhdadmins WHERE ID='" . $userid . "' AND dhdpass='" . md5($currpass) . "';"));
 	echo "ID IS: " . $checkpass['ID'] . "  encoded pass is: " . $currpass . "  hashed pass is: " . $hcpass;
-
-	
 */
-	
-	
+
 	//$newuser = mysql_query("INSERT INTO dhdadmins (dhduser, dhdfirst, dhdlast, dhdemail, dhdpass) VALUES ('" . $username . "', '" . $first . "', '" . $last . "', '" . $email . "', '" . $password . "');");
 
-/*	
-	
+/*
 	$useridandpass = mysql_query("SELECT ID, PASSWORD FROM USER WHERE ID != 493 AND ID != 495 ORDER BY ID");
-	
+
 	$hashedarray = array();
-	
+
 	while($row = mysql_fetch_assoc($useridandpass))
 	{
 		$hashedarray[$row['ID']] = md5($row['PASSWORD']);
 	}
-	
+
 	foreach($hashedarray as $key => $val)
 	{
 		echo "ID IS: " . $key . " HASHED PASSWORD IS: " . $val . "<br />";
 		//mysql_query("UPDATE USER SET PASSWORD='" . $val . "' WHERE ID='" . $key . "';");
 	}
-	
-
-
 
 /*
 	require 'php/DBI.php';
-	
+
 	$DBI = new DBI();
-	
+
 	$userid = 1;
-	
+
 	$t = strtotime('tomorrow') - time();
 	echo "T IS: " . $t;
-	
+
 */
-	
+
 	/*
 	date_default_timezone_set('America/New_York');
 
@@ -78,26 +133,26 @@
 	$microtime = microtime(true);
 	list($big, $small) = explode(".", $microtime);
 	$newtime = $big . $small;
-	
+
 	//$microfloat = $_SERVER["REQUEST_TIME_FLOAT"];
-	
+
 	echo "CURRENT: " . $currtime . "<br />";
 	echo "MICRO: " . $microtime . "<br />";
 	echo "MICROFLOAT: " . $newtime . "<br />";
-			  //  h  m  s  mh  dy  year 
+			  //  h  m  s  mh  dy  year
 	//echo mktime(0, 0, 0, 12, 32, 2012);
-	
+
 	//$sitelist = mysql_fetch_assoc(mysql_query("SELECT USER_ID FROM USER_USER_TYPE WHERE USER_TYPE_ID=3 AND USER_ID != 1;"));
-	
+
 	//echo "ID IS: " . $sitelist['USER_ID'];
 	*/
 	/*
-	int mktime ([ int $hour = date("H") 
-				[ int $minute = date("i") 
-				[ int $second = date("s") 
-				[ int $month = date("n") 
-				[ int $day = date("j") 
-				[ int $year = date("Y") 
+	int mktime ([ int $hour = date("H")
+				[ int $minute = date("i")
+				[ int $second = date("s")
+				[ int $month = date("n")
+				[ int $day = date("j")
+				[ int $year = date("Y")
 				[ int $is_dst = -1 ]]]]]]] )
 	*/
 
@@ -108,7 +163,7 @@
 				"fields"	=> "NAME, AGE, EYE_COLOR, SHOE_SIZE, WAIST, HEIGHT, WEIGHT, DOB",
 				"values"	=> "'Foo Bar1', 34, 'brown', 11, 32, 5.75, 200, '1979-03-15'",
 			));
-	
+
 	echo "RESULT IS: " . $ins['result'] . "<br />";
 	if(isset($ins['result']) && $ins['result'] == "success")
 	{
@@ -117,17 +172,17 @@
 	else
 	{
 		echo "NUMBER OF ERRORS: " . $ins['errcount'] . "<br />";
-		echo "ERROR IS: " . $ins['error'] . "<br />";		
+		echo "ERROR IS: " . $ins['error'] . "<br />";
 	}
 	*/
-	
+
 	//delete example
 	/*
 	$del = $DBI->delete(array(
 			"tables"	=> "TEST_TABLE",
 			"where"		=> "ID=10",
 	));
-	
+
 	echo "RESULT IS: " . $del['result'] . "<br />";
 	if(isset($del['result']) && $del['result'] == "success")
 	{
@@ -144,7 +199,7 @@
 	$r1 = $DBI->select(array(
 					'fields'	=> "USER.ID AS USERID, FIRST_NAME, LAST_NAME, EMAIL, USER_USER_TYPE.USER_TYPE_ID AS USERTYPEID",
 					'tables'	=> "USER, USER_USER_TYPE, USER_TYPE",
-					'where'	 	=> "USER.ACTIVE='1' 
+					'where'	 	=> "USER.ACTIVE='1'
 									AND USER.ID=USER_USER_TYPE.USER_ID
 										AND USER_USER_TYPE.USER_TYPE_ID=USER_TYPE.TYPE
 											AND USER.ID != '" . $userid . "'",
@@ -159,17 +214,17 @@
 	$f4 = $r1[$i]['EMAIL'];
 	echo "RESULT IS: " . $f1 . " " . $f2 . " " . $f3 . " " . $f4 . "<br />";
 	}
-	
+
 	echo "<br /><br />";
-	
+
 	//single array example
 	$r2 = $DBI->select(array(
 					'fields'	=> "ID",
 					'tables'	=> "USER",
 					'singlearray' => 1,
 				));
-	
-	for($i = 0; $i < count($r2); $i++) 
+
+	for($i = 0; $i < count($r2); $i++)
 	{
 		$f1 = $r2[$i];
 		echo "RESULT IS: " . $f1 . "<br />";
@@ -181,29 +236,26 @@
 	echo "T IS: <br />";
 	echo var_dump($t1);
 	echo "<br /><br /><br /><br />";
-	
+
 	echo "R IS: <br />";
 	echo var_dump($r);
 	*/
 	//echo "COUNT IS: " . $r . " <br /> " . $test;
 
-	
-	
-	
 	/*
 	$companyid = 163;
 	$checkpoc = mysql_fetch_assoc(mysql_query("SELECT NAME, POC_PRIMARY
 												FROM COMPANY
 												WHERE ID='" . $companyid . "';"));
 	$companyname = $checkpoc['NAME'];
-	
+
 	$getjobs = mysql_query("SELECT COMPANY.ID AS COMPANYID, COMPANY.NAME AS COMPANYNAME, POC_PRIMARY, FIRST_NAME, LAST_NAME, EMAIL, ALL_JOBS.ID AS JOBID, JOB_AVAILABLE.ID AS ALLJOBID, JOB_AVAILABLE.COMPANY_ID, JOB_ID, JOB_AVAILABLE.DESCRIPTION, EXPERIENCE, SALARY, JOB_AVAILABLE.CLEARANCE, JOB 
-							FROM COMPANY, JOB_AVAILABLE, ALL_JOBS, USER 
-							WHERE JOB_AVAILABLE.COMPANY_ID=COMPANY.ID 
-									AND JOB_ID=ALL_JOBS.ID 
-										AND USER.ID=POC_PRIMARY 
+							FROM COMPANY, JOB_AVAILABLE, ALL_JOBS, USER
+							WHERE JOB_AVAILABLE.COMPANY_ID=COMPANY.ID
+									AND JOB_ID=ALL_JOBS.ID
+										AND USER.ID=POC_PRIMARY
 											AND JOB_AVAILABLE.ACTIVE='1' ORDER BY COMPANY.NAME;");
-	
+
 	$html = "<table>";
 	while($row = mysql_fetch_assoc($getjobs))
 	{
@@ -219,16 +271,16 @@
 					  <td>" . $row['EMAIL'] . "</td>
 					  </tr>";
 	}
-	
+
 	$html .= "</table>";
-	
+
 	echo $html;
 	*/
-	
+
 	/*
-	
+
 	$file = "php/careers.txt";
-	
+
 	$jobs = split("\r\n", file_get_contents($file));
 	$c = 0;
 	for($i = 0; $i < count($jobs); $i++)
@@ -238,7 +290,7 @@
 		$results = mysql_query("INSERT INTO ALL_JOBS (JOB) VALUES ('" . $jobs[$i] . "');");
 		$c++;
 	}
-	
+
 	echo "INSERTED " . $c . " RECORDS!";
 */
 	//$states = array("AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY");
@@ -263,97 +315,9 @@
 	{
 		echo "<script>alert('NOPE');</script>";
 	}*/
-	
-	/***********************************************************/
-	//CODE FOR UPLOADING RESUMES TO DATABASE: DO NOT REMOVE!!!!!
-	/***********************************************************/
-	/*$allowedExts = array("PDF", "pdf");
-	$extension = end(explode(".", $_FILES["resumename"]["name"]));
-	if (($_FILES["resumename"]["type"] == "application/pdf") && in_array($extension, $allowedExts))
-	{
-		if ($_FILES["resumename"]["error"] > 0)
-		{
-			echo "Error: " . $_FILES["resumename"]["error"] . "<br />";
-		}
-		else
-		{
-			$resexist = mysql_fetch_assoc(mysql_query("SELECT ID, USER_ID
-					FROM USER_RESUME
-					WHERE USER_ID='" . $userid . "';"));
-			$tmpName  = $_FILES['resumename']['tmp_name'];
-			$fp     = fopen($tmpName, 'r');
-			$data 	= fread($fp, filesize($tmpName));
-			$data 	= addslashes($data);
-			fclose($fp);
-	
-			$today = getdate();
-			$year = $today['year'];
-			$mnth = sprintf("%02s", $today['mon']);
-			$day = sprintf("%02s", $today['mday']);
-			$datestamp = $year . "-" . $mnth . "-" . $day;
-	
-			$notification = "";
-			if($resexist['USER_ID'])
-			{
-				$results = mysql_query("UPDATE USER_RESUME
-						SET RESUME='" . $data . "',
-						DATE_UPDATED='" . $datestamp . "'
-						WHERE USER_ID='" . $userid . "' AND ID='" . $resexist['ID'] . "';");
-				if(mysql_errno())
-				{
-					$notification = "MySQL error " . mysql_errno() . ": " . mysql_error();
-				}
-				else
-				{
-					$notification = "Your resume has been updated!";
-				}
-				$log->logInfo("HERE IS NOTIFICATION: " . $notification);
-			}
-			else
-			{
-				$results = mysql_query("INSERT INTO USER_RESUME (USER_ID, RESUME, DATE_ADDED) VALUES ('" . $userid . "', '" . $data . "', '" . $datestamp . "');");
-				$notification = "Your resume has been uploaded!";
-			}
-	
-			echo ("<script language='javascript'>
-					window.alert('" . $notification . "');
-					window.location.href='edit_profile.php';
-					</script>");
-		}
-	}
-	else
-	{
-		echo ("<script language='javascript'>
-				window.alert('There was a problem uploading your resume - please try again');
-				window.location.href='edit_profile.php';
-				</script>");
-	}*/
-	
-	/*foreach (glob("*.txt") as $filename) {
-		echo "$filename size " . filesize($filename) . "\n";
-	}*/
-	
-	
-	/*$sm_form_fields = array(
-	 "facebook" 		=> $_POST['facebook'],
-			"twitter" 		=> $_POST['twitter'],
-			"googleplus" 	=> $_POST['googleplus'],
-			"linkedin" 		=> $_POST['linkedin'],
-			"blog" 			=> $_POST['blog'],
-			"skype" 		=> $_POST['skype'],
-	);*/
-	/*$sm_type_array = array(
-	 "facebook" 		=> '1',
-			"twitter" 		=> '2',
-			"googleplus" 	=> '3',
-			"linkedin" 		=> '4',
-			"blog" 			=> '5',
-			"skype" 		=> '6',
-	);*/
 
-	
 	/*$filename = "img/avatars/missing.jpg";
-	
+
 	if(file_exists($filename))
 	{
 		echo ("<script language='javascript'>
@@ -366,24 +330,7 @@
 				window.alert('THE FILE DOES NOT EXIST!');
 				</script>");
 	}*/
-/*	
-	$compinfo = mysql_query("SELECT ID, NAME FROM COMPANY;");
-	//$userinfo = 
-	
-	while($row = mysql_fetch_assoc($compinfo))
-	{
-		$id = $row['ID'];
-		$userinfo = mysql_fetch_assoc(mysql_query("SELECT USER_ID 
-													FROM USER_COMPANY
-													WHERE COMPANY_ID='" . $id . "';"));
-		
-		
-		$userresult = mysql_query("UPDATE COMPANY
-								   SET POC_PRIMARY='" . $userinfo['USER_ID'] . "'
-								   WHERE ID='" . $id . "';");
-	}
-*/
-	
+
 	/*
 	 $allowedExts = array("JPG", "JPEG", "GIF", "PNG", "jpg", "jpeg", "gif", "png");
 	$extension = end(explode(".", $_FILES["filename"]["name"]));
@@ -402,11 +349,11 @@
 	$data 	= fread($fp, filesize($tmpName));
 	$data 	= addslashes($data);
 	fclose($fp);
-		
+
 	$userid = 1;
-		
+
 	$checkexist = mysql_fetch_assoc(mysql_query("SELECT ID, USER_ID FROM USER_PICTURE WHERE USER_ID='" . $userid . "'"));
-		
+
 	if($checkexist['USER_ID'])
 	{
 	$results = mysql_query("UPDATE USER_PICTURE
@@ -434,7 +381,5 @@
 			window.location.href='edit_profile.php';
 			</script>");
 	}*/
-	
-	
-	
+
 ?>
