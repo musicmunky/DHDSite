@@ -14,9 +14,13 @@
 
 	$use_ajax = useAjax($b,$m);
 
+    $my_link = connectToDb();
+
 	$t = isset($_GET['t']) ? $_GET['t'] : "";
 	$t = urldecode($t);
-	$t = mysql_real_escape_string($t);
+	$t = mysqli_real_escape_string($my_link, $t);
+    mysqli_close($my_link);
+
 	$html = "";
 	if($t == "" || preg_match("/^\d+$/", $t))
 	{

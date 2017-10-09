@@ -26,7 +26,9 @@
 	}
 */
 
-	$webaddress = "http://thedoghousediaries.com/";
+//	$webaddress = "http://thedoghousediaries.com/";
+	$webaddress = "http://104.131.12.172/";
+    $mysqli_link = connectToDb();
 
 	if(isset($_POST['method']) && !empty($_POST['method']))
 	{
@@ -149,7 +151,7 @@
 			//print_r("COMFILE: " . $comfile['meta_value']);
 			if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
 			{
-				$ls = shell_exec('ls /var/www/html/dhdcomics | grep "' . $comfile['meta_value'] . '"');
+				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep "' . $comfile['meta_value'] . '"');
 				if($ls != "")
 				{
 					$name = $ls;
@@ -163,14 +165,14 @@
 				$comdgmt = $comic['post_date_gmt'];
 				$cdate = substr($comic['post_date'], 0, 10);
 				$cdgmt = substr($comic['post_date_gmt'], 0, 10);
-				$ls = shell_exec('ls /var/www/html/dhdcomics | grep ' . $cdate);
+				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdate);
 				if($ls != "")
 				{
 					$name = $ls;
 				}
 				else
 				{
-					$ls = shell_exec('ls /var/www/html/dhdcomics | grep ' . $cdgmt);
+					$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdgmt);
 					$name = $ls;
 				}
 			}
@@ -223,9 +225,11 @@
 
 	function getComic($p)
 	{
+        $my_link = connectToDb();
+
 		$currid = $p;
 		$currid = urldecode($currid);
-		$currid = mysql_real_escape_string($currid);
+		$currid = mysqli_real_escape_string($my_link, $currid);
 
 		$result  = "";
 		$content = "";
@@ -235,27 +239,27 @@
 
 		global $webaddress;
 
-		$first = getFirst();
-		$firsthoverlink = isset($first['ID']) ? buildHover($first['ID'],$first['post_title']) : "";
+		$first = getFirst($my_link);
+		$firsthoverlink = isset($first['ID']) ? buildHover($first['ID'],$first['post_title'], $my_link) : "";
 
-		$rand = getRandom();
-		$randhoverlink = isset($rand['ID']) ? buildHover($rand['ID'],$rand['post_title']) : "";
+		$rand = getRandom($my_link);
+		$randhoverlink = isset($rand['ID']) ? buildHover($rand['ID'],$rand['post_title'], $my_link) : "";
 
-		$latest = getLatest();
-		$latesthoverlink = isset($latest['ID']) ? buildHover($latest['ID'],$latest['post_title']) : "";
+		$latest = getLatest($my_link);
+		$latesthoverlink = isset($latest['ID']) ? buildHover($latest['ID'],$latest['post_title'], $my_link) : "";
 
 		$currid = !$currid ? $latest['ID'] : $currid;
 
-		$prev = getPrevious($currid);
-		$prevhoverlink = isset($prev['ID']) ? buildHover($prev['ID'],$prev['post_title']) : "";
+		$prev = getPrevious($currid, $my_link);
+		$prevhoverlink = isset($prev['ID']) ? buildHover($prev['ID'],$prev['post_title'], $my_link) : "";
 
-		$next = getNext($currid);
-		$nexthoverlink = isset($next['ID']) ? buildHover($next['ID'],$next['post_title']) : "";
+		$next = getNext($currid, $my_link);
+		$nexthoverlink = isset($next['ID']) ? buildHover($next['ID'],$next['post_title'], $my_link) : "";
 
 		$firstlink  = "<a id='firstlink' href='" . $webaddress . $first['ID']  . "' class='comicnavlinks' title='" . htmlentities($firsthoverlink, ENT_QUOTES) . "'>" . htmlspecialchars("<<", ENT_HTML401) . "</a>";
 		$latestlink = "<a id='latestlink' href='" . $webaddress . $latest['ID'] . "' class='comicnavlinks' title='" . htmlentities($latesthoverlink, ENT_QUOTES) . "'>" . htmlspecialchars(">>", ENT_HTML401) . "</a>";
 
-		$prevlink = isset($prev['ID']) ? 
+		$prevlink = isset($prev['ID']) ?
 						"<a id='previouslink' href='" . $webaddress . $prev['ID'] . "' class='comicnavlinks' title='" . htmlentities($prevhoverlink, ENT_QUOTES) . "'>" . htmlspecialchars("<", ENT_HTML401) . "</a>" :
 							"";
 		$nextlink = isset($next['ID']) ?
@@ -269,8 +273,8 @@
 							"<li>" . $randlink . "</li><li>" . $nextlink . "</li>" .
 							"<li>" . $latestlink; "</li></ul>";
 
-		$comic = getComicMeta($currid);
-		$hover = getHover($currid);
+		$comic = getComicMeta($currid, $my_link);
+		$hover = getHover($currid, $my_link);
 
 		$comichtml = "";
 		$name = "";
@@ -282,11 +286,11 @@
 		if(isset($comic['ID']))
 		{
 			$name = "";
-			$comfile = mysql_fetch_assoc(mysql_query("SELECT meta_value FROM dbdoghouse.postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
+			$comfile = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT meta_value FROM dbdoghouse.postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
 
 			if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
 			{
-				$ls = shell_exec('ls /var/www/html/dhdcomics | grep "' . $comfile['meta_value'] . '"');
+				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep "' . $comfile['meta_value'] . '"');
 				if($ls != "")
 				{
 					$name = $ls;
@@ -299,14 +303,14 @@
 				$comdgmt = $comic['post_date_gmt'];
 				$cdate = substr($comic['post_date'], 0, 10);
 				$cdgmt = substr($comic['post_date_gmt'], 0, 10);
-				$ls = shell_exec('ls /var/www/html/dhdcomics | grep ' . $cdate);
+				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdate);
 				if($ls != "")
 				{
 					$name = $ls;
 				}
 				else
 				{
-					$ls = shell_exec('ls /var/www/html/dhdcomics | grep ' . $cdgmt);
+					$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdgmt);
 					$name = $ls;
 				}
 			}
@@ -336,6 +340,8 @@
 			$subtext = "Without precise calculations we could fly right through a popup or bounce too close to a supernova, and that'd end your trip real quick, wouldn't it?";
 			$name = "";
 		}
+
+        mysqli_close($my_link);
 
 		$result = array(
 					"status"	=> $status,
@@ -449,75 +455,77 @@
 		return $result;
 	}
 
-	function getComicMeta($c)
+	function getComicMeta($c, $my_link)
 	{
-		$cmc = mysql_fetch_assoc(mysql_query("SELECT ID, post_date, post_date_gmt, post_content, post_title, post_status, post_live_date FROM posts WHERE ID=" . $c . " AND post_type='post' AND post_name !='';"));
+		$cmc = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, post_date, post_date_gmt, post_content, post_title, post_status, post_live_date FROM posts WHERE ID=" . $c . " AND post_type='post' AND post_name !='';"));
 		return $cmc;
 	}
 
-	function getHover($c)
+	function getHover($c, $my_link)
 	{
-		$hvr = mysql_fetch_assoc(mysql_query("SELECT meta_value FROM postmeta WHERE post_id=" . $c . " AND meta_key='comic_description';"));
+		$hvr = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT meta_value FROM postmeta WHERE post_id=" . $c . " AND meta_key='comic_description';"));
 		return $hvr;
 	}
 
-	function buildHover($id,$pt)
+	function buildHover($id,$pt, $my_link)
 	{
-		$t_hover = mysql_fetch_assoc(mysql_query("SELECT meta_value FROM postmeta WHERE post_id=" . $id . " AND meta_key='comic_description';"));
+		$t_hover = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT meta_value FROM postmeta WHERE post_id=" . $id . " AND meta_key='comic_description';"));
 		$t_hoverlink = isset($t_hover['meta_value']) ? $t_hover['meta_value'] : $pt;
 		return $t_hoverlink;
 	}
 
-	function getTags($c)
+	function getTags($c, $my_link)
 	{
-		$tags = mysql_fetch_assoc(mysql_query("SELECT meta_value FROM postmeta WHERE post_id=" . $c . " AND meta_key='comic_tags';"));
+		$tags = mysql_fetch_assoc(mysql_query($my_link, "SELECT meta_value FROM postmeta WHERE post_id=" . $c . " AND meta_key='comic_tags';"));
 		return $tags;
 	}
 
-	function getPrevious($c)
+	function getPrevious($c, $my_link)
 	{
-		$prv = mysql_fetch_assoc(mysql_query("SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status='publish' and post_date < (SELECT post_date FROM posts WHERE ID=" . $c . ") ORDER BY post_date DESC LIMIT 0,1;"));
+		$prv = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status='publish' and post_date < (SELECT post_date FROM posts WHERE ID=" . $c . ") ORDER BY post_date DESC LIMIT 0,1;"));
 		if(!isset($prv['ID']) || $prv['ID'] == "")
 		{
-			$prv = getFirst();
+			$prv = getFirst($my_link);
 		}
 		return $prv;
 	}
 
-	function getNext($c)
+	function getNext($c, $my_link)
 	{
-		$nxt = mysql_fetch_assoc(mysql_query("SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status='publish' and post_date > (SELECT post_date FROM posts WHERE ID=" . $c . ") ORDER BY post_date ASC LIMIT 0,1;"));
+		$nxt = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status='publish' and post_date > (SELECT post_date FROM posts WHERE ID=" . $c . ") ORDER BY post_date ASC LIMIT 0,1;"));
 		if(!isset($nxt['ID']) || $nxt['ID'] == "")
 		{
-			$nxt = getLatest();
+			$nxt = getLatest($my_link);
 		}
 		return $nxt;
 	}
 
-	function getFirst()
+	function getFirst($my_link)
 	{
-		$frst = mysql_fetch_assoc(mysql_query("SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status = 'publish' ORDER BY post_date ASC LIMIT 0,1;"));
+		$frst = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status = 'publish' ORDER BY post_date ASC LIMIT 0,1;"));
 		return $frst;
 	}
 
-	function getLatest()
+	function getLatest($my_link)
 	{
-		$ltst = mysql_fetch_assoc(mysql_query("SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status = 'publish' ORDER BY post_date DESC LIMIT 0,1;"));
+		$ltst = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status = 'publish' ORDER BY post_date DESC LIMIT 0,1;"));
 		return $ltst;
 	}
 
-	function getRandom()
+	function getRandom($my_link)
 	{
-		$rnd = mysql_fetch_assoc(mysql_query("SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status = 'publish' ORDER BY RAND() LIMIT 0,1;"));
+		$rnd = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, post_title FROM posts WHERE post_type='post' AND post_name != '' and post_status = 'publish' ORDER BY RAND() LIMIT 0,1;"));
 		return $rnd;
 	}
 
 	function getArchive()
 	{
+        $my_link = connectToDb();
+
 		$html = "";
-		$yearqry = mysql_query("SELECT DISTINCT LEFT(post_date, 4) AS yr FROM posts ORDER BY yr DESC;");
+		$yearqry = mysqli_query($my_link, "SELECT DISTINCT LEFT(post_date, 4) AS yr FROM posts ORDER BY yr DESC;");
 		$yeararray = array();
-		while($row = mysql_fetch_assoc($yearqry))
+		while($row = mysqli_fetch_assoc($yearqry))
 		{
 			array_push($yeararray, $row['yr']);
 		}
@@ -534,12 +542,12 @@
 					</div>
 					<table>";
 
-			$qry = mysql_query("SELECT ID, post_date, post_title, guid FROM posts
+			$qry = mysqli_query($my_link, "SELECT ID, post_date, post_title, guid FROM posts
 								WHERE post_type='post'
 									AND post_date like '" . $year . "%'
 										AND post_name != ''
 											ORDER BY post_date DESC;");
-			while($row = mysql_fetch_assoc($qry))
+			while($row = mysqli_fetch_assoc($qry))
 			{
 				$date = DateTime::createFromFormat($format, $row['post_date']);
 				$newdate = $date->format("F jS");
@@ -561,6 +569,8 @@
 				"message"	=> "message",
 				"content"	=> $html
 		);
+        mysqli_close($my_link);
+
 		return $result;
 	}
 
@@ -770,7 +780,7 @@
 
 		if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
 		{
-			$ls = shell_exec('ls /var/www/html/dhdcomics | grep "' . $comfile['meta_value'] . '"');
+			$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep "' . $comfile['meta_value'] . '"');
 			if($ls != "")
 			{
 				$name = $ls;
@@ -783,14 +793,14 @@
 			$comdgmt = $comic['post_date_gmt'];
 			$cdate = substr($comic['post_date'], 0, 10);
 			$cdgmt = substr($comic['post_date_gmt'], 0, 10);
-			$ls = shell_exec('ls /var/www/html/dhdcomics | grep ' . $cdate);
+			$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdate);
 			if($ls != "")
 			{
 				$name = $ls;
 			}
 			else
 			{
-				$ls = shell_exec('ls /var/www/html/dhdcomics | grep ' . $cdgmt);
+				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdgmt);
 				$name = $ls;
 			}
 		}
@@ -962,7 +972,9 @@
 
 	function getAnnouncementComic()
 	{
-		$announce = mysql_fetch_assoc(mysql_query("SELECT * FROM dhdannouncements;"));
+        $my_link = connectToDb();
+
+		$announce = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT * FROM dhdannouncements;"));
 		$status = "success";
 		$message = "";
 		$result = array(
@@ -973,6 +985,7 @@
 						"active" => $announce['active']
 				)
 		);
+        mysqli_close($my_link);
 
 		return $result;
 	}
