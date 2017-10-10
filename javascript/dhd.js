@@ -6,7 +6,6 @@ $(document).ready(function() {
 });*/
 /*
 $(document).on("click", ".comicnavlinks", function(e) {
-	
 	e.preventDefault();
 	var id = $(this).attr('href');
 	getNextComic(id, true);

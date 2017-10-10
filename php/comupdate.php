@@ -2,10 +2,10 @@
 
 	define('LIBRARY_CHECK',true);
 	require 'library.php';
-	
+
 	if(isset($_POST['comicupdate']) && $_POST['comicupdate'] == "Update")
 	{
-		
+
 		$COMICID = $_POST['edit_comicid'];
 		$COMICID = urldecode($COMICID);
 		$COMICID = mysql_real_escape_string($COMICID);
@@ -16,9 +16,9 @@
 			$allowedExts = array("gif", "jpeg", "jpg", "png");
 			$temp = explode(".", $_FILES["edit_cfile"]["name"]);
 			$extension = end($temp);
-			
+
 			$filename = $_POST['edit_cname'];
-			
+
 			if ((($_FILES["edit_cfile"]["type"] == "image/gif")
 					|| ($_FILES["edit_cfile"]["type"] == "image/jpeg")
 					|| ($_FILES["edit_cfile"]["type"] == "image/jpg")

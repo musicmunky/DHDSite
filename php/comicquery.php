@@ -1,17 +1,17 @@
 <?php
 	define('INCLUDE_CHECK',true);
-	
+
 	require 'connect.php';
 
 	$q = strtolower($_GET["q"]);
 	$q = mysql_real_escape_string($q);
-	
+
 	$orstate = " (post_title like '%" . $q . "%' or post_content like '%" . $q . "%') and";
 	if($_GET['ga'] == 1)
 	{
 		$orstate = "";
 	}
-	
+
 	$sql = mysql_query("select ID, post_title, post_date, post_status, post_live_date
 						from posts 
 						where" . $orstate . " post_type='post' and (post_status='publish' or post_status='pending' or post_status='inactive')
@@ -21,7 +21,7 @@
 	$count = 0;
 	if($numrows > 0)
 	{
-		while($row = mysql_fetch_assoc($sql)) 
+		while($row = mysql_fetch_assoc($sql))
 		{
 			$count++;
 			$altclass = ($count % 2) ? "mainrow" : "altrow";

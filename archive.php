@@ -4,13 +4,6 @@
 	require 'php/checkbrowser.php';
 	date_default_timezone_set('America/New_York');
 
-	//$browser = get_browser(null, true);
-	//$b = $browser['browser'];
-	//$v = $browser['version'];
-	//$m = $browser['majorver'];
-
-	//$use_ajax = useAjax($b,$m);
-
 	$html = getArchive();
 ?>
 <html>

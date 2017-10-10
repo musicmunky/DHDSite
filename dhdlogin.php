@@ -1,4 +1,4 @@
-<?php 
+<?php
 	define('LIBRARY_CHECK',true);
 	require 'php/library.php';
 /*
@@ -14,20 +14,24 @@
 
 	if(!empty($_POST))
 	{
+        $my_link = connectToDb();
+
 		$user = isset($_POST['txtusername']) ? $_POST['txtusername'] : "";
 		$pass = isset($_POST['txtpassword']) ? $_POST['txtpassword'] : "";
-	
+
 		$user = urldecode($user);
 		$pass = urldecode($pass);
-		$user = mysql_real_escape_string($user);
-		$pass = mysql_real_escape_string($pass);
+		$user = mysqli_real_escape_string($user);
+		$pass = mysqli_real_escape_string($pass);
 		$hashedpassword = md5($pass);
 
-		$checkpass = mysql_fetch_assoc(mysql_query("SELECT ID, dhduser
+		$checkpass = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, dhduser
 													FROM dhdadmins
 													WHERE dhduser='" . $user . "'
 													AND dhdpass='" . $hashedpassword . "';"));
-		
+
+        mysqli_close($my_link);
+
 		if(isset($checkpass['ID']) && $checkpass['ID'] != "")
 		{
 			ini_set('session.gc_maxlifetime', 24*60*60);
@@ -38,7 +42,7 @@
 				session_name('dhdmaintenance');
 				session_start();
 			}
-			
+
 			$_SESSION['userid'] = $checkpass['ID'];
 			$_SESSION['username'] = $checkpass['dhduser'];
 		}
