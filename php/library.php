@@ -15,16 +15,7 @@
 	define('INCLUDE_CHECK',true);
 	require 'connect.php';
 	date_default_timezone_set('America/New_York');
-/*
-	ini_set('session.gc_maxlifetime', 24*60*60);
-	ini_set('session.gc_probability',1);
-	ini_set('session.gc_divisor',100);
-	if(!isset($_SESSION))
-	{
-		session_name('dhdmaintenance');
-		session_start();
-	}
-*/
+
 
 //	$webaddress = "http://thedoghousediaries.com/";
 	$webaddress = "http://104.131.12.172/";
@@ -151,7 +142,7 @@
 			//print_r("COMFILE: " . $comfile['meta_value']);
 			if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
 			{
-				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep "' . $comfile['meta_value'] . '"');
+				$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep "' . $comfile['meta_value'] . '"');
 				if($ls != "")
 				{
 					$name = $ls;
@@ -165,14 +156,14 @@
 				$comdgmt = $comic['post_date_gmt'];
 				$cdate = substr($comic['post_date'], 0, 10);
 				$cdgmt = substr($comic['post_date_gmt'], 0, 10);
-				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdate);
+				$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep ' . $cdate);
 				if($ls != "")
 				{
 					$name = $ls;
 				}
 				else
 				{
-					$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdgmt);
+					$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep ' . $cdgmt);
 					$name = $ls;
 				}
 			}
@@ -290,7 +281,7 @@
 
 			if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
 			{
-				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep "' . $comfile['meta_value'] . '"');
+				$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep "' . $comfile['meta_value'] . '"');
 				if($ls != "")
 				{
 					$name = $ls;
@@ -303,14 +294,14 @@
 				$comdgmt = $comic['post_date_gmt'];
 				$cdate = substr($comic['post_date'], 0, 10);
 				$cdgmt = substr($comic['post_date_gmt'], 0, 10);
-				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdate);
+				$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep ' . $cdate);
 				if($ls != "")
 				{
 					$name = $ls;
 				}
 				else
 				{
-					$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdgmt);
+					$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep ' . $cdgmt);
 					$name = $ls;
 				}
 			}
@@ -780,7 +771,7 @@
 
 		if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
 		{
-			$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep "' . $comfile['meta_value'] . '"');
+			$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep "' . $comfile['meta_value'] . '"');
 			if($ls != "")
 			{
 				$name = $ls;
@@ -793,14 +784,14 @@
 			$comdgmt = $comic['post_date_gmt'];
 			$cdate = substr($comic['post_date'], 0, 10);
 			$cdgmt = substr($comic['post_date_gmt'], 0, 10);
-			$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdate);
+			$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep ' . $cdate);
 			if($ls != "")
 			{
 				$name = $ls;
 			}
 			else
 			{
-				$ls = shell_exec('ls /var/www/html/doghousediaries/dhdcomics | grep ' . $cdgmt);
+				$ls = shell_exec('ls /var/www/html/doghousediaries.com/dhdcomics | grep ' . $cdgmt);
 				$name = $ls;
 			}
 		}
