@@ -129,7 +129,7 @@
 		if(isset($comic['ID']) && isset($comic['post_status']) && $comic['post_status'] == "publish")
 		{
 /*
-			$comfile = mysql_fetch_assoc(mysql_query("SELECT p.ID, p.post_date, p.post_date_gmt, pm.meta_value
+			$comfile = mysqli_fetch_assoc(mysqli_query("SELECT p.ID, p.post_date, p.post_date_gmt, pm.meta_value
 													  FROM posts p
 													  LEFT JOIN (
 														  SELECT pm.post_id, pm.meta_value
@@ -476,7 +476,7 @@
 
 	function getTags($c, $my_link)
 	{
-		$tags = mysql_fetch_assoc(mysql_query($my_link, "SELECT meta_value FROM postmeta WHERE post_id=" . $c . " AND meta_key='comic_tags';"));
+		$tags = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT meta_value FROM postmeta WHERE post_id=" . $c . " AND meta_key='comic_tags';"));
 		return $tags;
 	}
 
@@ -614,7 +614,7 @@
 		{
 			$status = "error";
 			$message = "There was a problem with the database - please call your administrator";
-			//$message = "MySQL error " . mysql_errno() . ": " . mysql_error();
+			//$message = "MySQL error " . mysqli_errno() . ": " . mysqli_error();
 		}
 		else
 		{
@@ -697,7 +697,7 @@
 		{
 			$status = "error";
 			$message = "There was a problem with the database - please call your administrator";
-			//$message = "MySQL error " . mysql_errno() . ": " . mysql_error();
+			//$message = "MySQL error " . mysqli_errno() . ": " . mysqli_error();
 		}
 		else
 		{
@@ -746,7 +746,7 @@
 			{
 				$status = "error";
 				$message = "There was a problem with the database - please call your administrator";
-				//$message = "MySQL error " . mysql_errno() . ": " . mysql_error();
+				//$message = "MySQL error " . mysqli_errno() . ": " . mysqli_error();
 			}
 			else
 			{
