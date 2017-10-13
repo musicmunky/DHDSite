@@ -1,16 +1,6 @@
 <?php
 	define('LIBRARY_CHECK',true);
 	require 'php/library.php';
-/*
-	ini_set('session.gc_maxlifetime', 24*60*60);
-	ini_set('session.gc_probability',1);
-	ini_set('session.gc_divisor',100);
-	if(!isset($_SESSION))
-	{
-		session_name('dhdmaintenance');
-		session_start();
-	}
-*/
 
 	if(!empty($_POST))
 	{
@@ -53,7 +43,6 @@
 					window.alert('Incorrect Username/Password combo!');
 					document.location.href = 'dhdlogin';
 					</script>");
-			//header('Location: dhdlogin');
 		}
 	}
 

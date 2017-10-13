@@ -11,5 +11,5 @@
 	<div class="thumb"><a href="http://thedoghousediaries.com/5053"><img class="thumbLink" src="logos/coffee.png"></a></div>
 	<div class="thumb"><a href="http://thedoghousediaries.com/4491"><img class="thumbLink" src="logos/sheets.png"></a></div>
 	<div class="thumb"><a href="http://thedoghousediaries.com/4639"><img class="thumbLink" src="logos/scienceofdogs.png"></a></div>
-	<div class="thumb"><a href="http://thedoghousediaries.com/1127"><img class="thumbLink" src="logos/killingmachine.png"></a></div>			
+	<div class="thumb"><a href="http://thedoghousediaries.com/1127"><img class="thumbLink" src="logos/killingmachine.png"></a></div>
 </div>

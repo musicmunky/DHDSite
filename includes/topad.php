@@ -1,4 +1,4 @@
 <?php ?>
 <div id="topAd">
-	<script src="http://tag.contextweb.com/TagPublish/getjs.aspx?action=VIEWAD&cwrun=200&cwadformat=728X90&cwpid=546668&cwwidth=728&cwheight=90&cwpnet=1&cwtagid=125745"></script>
+	<!--<script src="http://tag.contextweb.com/TagPublish/getjs.aspx?action=VIEWAD&cwrun=200&cwadformat=728X90&cwpid=546668&cwwidth=728&cwheight=90&cwpnet=1&cwtagid=125745"></script>-->
 </div>

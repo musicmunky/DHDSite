@@ -30,7 +30,7 @@ $(function() {
 				$.ajax({
 					type: "POST",
 					url: "php/library.php",
-					data: { method:  	'getAnnouncementForm', 
+					data: { method:  	'getAnnouncementForm',
 							libcheck: 	true},
 					success: function(result){
 						var response = JSON.parse(result);
@@ -72,16 +72,16 @@ $(function() {
 		modal: true,
 	});
 
-	$( "#golivedate" ).datepicker({ 
-						minDate: 0, 
+	$( "#golivedate" ).datepicker({
+						minDate: 0,
 						maxDate: "+1M",
-						dateFormat: "yy-mm-dd" 
+						dateFormat: "yy-mm-dd"
 	});
 
-	$( "#edit_golivedate" ).datepicker({ 
-						minDate: 0, 
+	$( "#edit_golivedate" ).datepicker({
+						minDate: 0,
 						maxDate: "+1M",
-						dateFormat: "yy-mm-dd" 
+						dateFormat: "yy-mm-dd"
 		});
 });
 
@@ -204,7 +204,7 @@ function updateUser()
 		$.ajax({
 			type: "POST",
 			url: "php/library.php",
-			data: { method:  'updateUser', 
+			data: { method:  'updateUser',
 				libcheck: true, 
 				userid:		id,
 				username:	un,

@@ -156,8 +156,8 @@ function getNextComic(c, ps)
 				}
 				*/
 
-				//addthis.update('share', 'url', myhref); 
-				//addthis.url = myhref;                
+				//addthis.update('share', 'url', myhref);
+				//addthis.url = myhref;
 				//addthis.toolbox(".addthis_native_toolbox");
 				//addthis.toolbox('.addthis_native_toolbox');
 

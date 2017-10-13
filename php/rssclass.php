@@ -9,12 +9,12 @@ class RSS
 		require 'library.php';
 		require 'connect.php';
 	}
-	
+
 	public function GetFeed()
 	{
 		return $this->getItems();
 	}
-	  
+
 	private function getItems()
 	{
 		$items = '<?xml version="1.0" encoding="UTF-8"?>
@@ -27,10 +27,10 @@ class RSS
 						 xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
 						 xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
 						 xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
-				
+
 						<channel>
 						<title>DOGHOUSE</title>
-				
+
 						<link>http://thedoghousediaries.com</link>
 						<description />
 						<lastBuildDate>Mon, 14 Jul 2014 16:09:34 +0000</lastBuildDate>
@@ -65,14 +65,14 @@ class RSS
 			$meta = explode("~||~", $row['metadata']);
 			$hover = $meta[0];
 			$image = $meta[1];
-			
+
 			$size = getimagesize("../dhdcomics/" . $image);
-			
+
 			//$link = "http://feedproxy.google.com/~r/thedoghousediaries/feed/~3/Qz6ypymlKOc/" . $row['ID'];
 			$link = "http://" . $url . "/" . $row['ID'];
 			//$img = '<img src="http://feeds.feedburner.com/~r/thedoghousediaries/feed/~4/Qz6ypymlKOc" height="1" width="1"/>';
 			$img = '<img src="http://' . $url . '/dhdcomics/' . $image . '" height="1" width="1"/>';
-			
+
 			$items .= '<item>
 							<title>' . $title . '</title>
 							<link>' . $link . '</link>
