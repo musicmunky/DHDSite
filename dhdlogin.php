@@ -21,8 +21,8 @@
 
 		$user = urldecode($user);
 		$pass = urldecode($pass);
-		$user = mysqli_real_escape_string($user);
-		$pass = mysqli_real_escape_string($pass);
+		$user = mysqli_real_escape_string($my_link, $user);
+		$pass = mysqli_real_escape_string($my_link, $pass);
 		$hashedpassword = md5($pass);
 
 		$checkpass = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID, dhduser
@@ -34,6 +34,7 @@
 
 		if(isset($checkpass['ID']) && $checkpass['ID'] != "")
 		{
+            session_save_path ("/var/www/doghousediaries/session_data/");
 			ini_set('session.gc_maxlifetime', 24*60*60);
 			ini_set('session.gc_probability',1);
 			ini_set('session.gc_divisor',100);

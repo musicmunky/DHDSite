@@ -1,6 +1,8 @@
-<?php 
+<?php
 	define('LIBRARY_CHECK',true);
 	require 'php/library.php';
+
+    session_save_path ("/var/www/doghousediaries/session_data/");
 
 	if(isset($_GET['logout']))
 	{
@@ -15,7 +17,7 @@
 		session_name('dhdmaintenance');
 		session_start();
 	}
-	
+
 	$disclaimer = "";
 	$html = "";
 	if(!isset($_SESSION['username']) || !isset($_SESSION['userid']))
@@ -33,8 +35,9 @@
 						</div>";
 		*/
 		$disclaimer = "";
-		
-		$userquery = mysql_query("SELECT * FROM dhdadmins ORDER BY ID ASC;");
+
+        $my_link = connectToDb();
+		$userquery = mysqli_query($my_link, "SELECT * FROM dhdadmins ORDER BY ID ASC;");
 		$html = "<table style='border-collapse:collapse;width:100%;'>
 					<tr class='headerrow'>
 						<td>username</td>
@@ -43,7 +46,7 @@
 						<td></td><td></td>
 					</tr>";
 		$count = 0;
-		while($row = mysql_fetch_assoc($userquery))
+		while($row = mysqli_fetch_assoc($userquery))
 		{
 			$count++;
 			$altclass = ($count % 2) ? "" : "altrow";
@@ -64,6 +67,7 @@
 		$html .= "</table>";
 		//currently not loading until tab is clicked...faster initial load that way...
 		//$comictablehtml = getComicTable(array("firstload" => 1, "method" => 'getComicTable', "libcheck" => true));
+        mysqli_close($my_link);
 	}
 
 ?>
@@ -80,7 +84,7 @@
 	</head>
 	<body>
 		<div class="header">
-			DHD Administration			
+			DHD Administration
 			<span style="cursor:pointer;float:right;font-family:Monaco,Consolas,'Lucida Console',monospace;font-size:16px;margin-top:12px;">
 				<a id="logout" name="logout" style="text-decoration:none;" href="dhdadmin.php?logout">logout</a>
 			</span>

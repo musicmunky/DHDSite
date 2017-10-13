@@ -19,13 +19,13 @@
 
 //	$webaddress = "http://thedoghousediaries.com/";
 	$webaddress = "http://104.131.12.172/";
-    $mysqli_link = connectToDb();
+    $my_link = connectToDb();
 
 	if(isset($_POST['method']) && !empty($_POST['method']))
 	{
 		$method = $_POST['method'];
 		$method = urldecode($method);
-		$method = mysql_real_escape_string($method);
+		$method = mysqli_real_escape_string($my_link, $method);
 
 		switch($method)
 		{
@@ -48,7 +48,7 @@
 			default: noFunction($_POST);
 				break;
 		}
-		mysql_close($link);
+		mysqli_close($my_link);
 	}
 
 	function noFunction()
@@ -64,9 +64,11 @@
 
 	function getAjaxComic($P)
 	{
+        $my_link = connectToDb();
+
 		$currid = $P['value'];
 		$currid = urldecode($currid);
-		$currid = mysql_real_escape_string($currid);
+		$currid = mysqli_real_escape_string($currid);
 
 		$result  = "";
 		$content = "";
@@ -137,7 +139,7 @@
 													  WHERE p.ID=" . $comic['ID'] . " AND p.post_type='post' AND p.post_status != 'trash';"));
 */
 			$name = "";
-			$comfile = mysql_fetch_assoc(mysql_query("SELECT meta_value FROM dbdoghouse.postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
+			$comfile = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT meta_value FROM dbdoghouse.postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
 
 			//print_r("COMFILE: " . $comfile['meta_value']);
 			if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
@@ -206,6 +208,8 @@
 				)
 		);
 
+        mysqli_close($my_link);
+
 		if($firstload){
 			return $result;
 		}
@@ -273,7 +277,7 @@
 		$subtext = "";
 		$titletext = "";
 
-		//while($row = mysql_fetch_assoc($allcomp))
+		//while($row = mysqli_fetch_assoc($allcomp))
 		if(isset($comic['ID']))
 		{
 			$name = "";
@@ -353,20 +357,22 @@
 
 	function getComicJson($c)
 	{
+        $my_link = connectToDb();
+
 		$currid = $c;
 		$currid = urldecode($currid);
-		$currid = mysql_real_escape_string($currid);
+		$currid = mysqli_real_escape_string($currid);
 
 		$status = "";
 		$message = "";
 
-		$frst = getFirst();
-		$last = getLatest();
-		$rand = getRandom();
+		$frst = getFirst($my_link);
+		$last = getLatest($my_link);
+		$rand = getRandom($my_link);
 
 		$currid = !$currid ? $last['ID'] : $currid;
-		$prev = getPrevious($currid);
-		$next = getNext($currid);
+		$prev = getPrevious($currid, $my_link);
+		$next = getNext($currid, $my_link);
 
 		$frstid = $frst['ID'];
 		$lastid = $last['ID'];
@@ -374,8 +380,8 @@
 		$nextid = $next['ID'];
 		$randid = $rand['ID'];
 
-		$comic = getComicMeta($currid);
-		$hover = getHover($currid);
+		$comic = getComicMeta($currid ,$my_link);
+		$hover = getHover($currid, $my_link);
 		$title = "";
 		$subtext = "";
 		$titletext = "";
@@ -383,7 +389,7 @@
 
 		if(isset($comic['ID']))
 		{
-			$comfile = mysql_fetch_assoc(mysql_query("SELECT meta_value FROM dbdoghouse.postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
+			$comfile = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT meta_value FROM dbdoghouse.postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
 			$filename = $comfile['meta_value'];
 			$titletext = isset($hover['meta_value']) ? htmlentities($hover['meta_value'], ENT_QUOTES) : htmlentities($comic['post_title'], ENT_QUOTES);
 			$title = isset($comic['post_title']) ? $comic['post_title'] : "";
@@ -410,6 +416,9 @@
 		{
 			$result = getErrorJson();
 		}
+
+        mysqli_close($my_link);
+
 		return $result;
 	}
 
@@ -568,11 +577,12 @@
 	function createUser($P)
 	{
 		global $webaddress;
+        $my_link = connectToDb();
 
 		foreach($P as $key => $val)
 		{
 			$val = urldecode($val);
-			$val = mysql_real_escape_string($val);
+			$val = mysqli_real_escape_string($val);
 			$P[$key] = $val;
 		}
 
@@ -596,11 +606,11 @@
 		}
 		$hashedpassword = md5($password);
 
-		$insertuser = mysql_query( "INSERT INTO
+		$insertuser = mysqli_query($my_link, "INSERT INTO
 									dhdadmins (dhduser, dhdfirst, dhdlast, dhdemail, dhdpass)
 									VALUES ('" . $uname . "', '" . $fname . "', '" . $lname . "', '" . $email . "', '" . $hashedpassword . "');");
-		$userid = mysql_insert_id();
-		if(mysql_errno())
+		$userid = mysqli_insert_id();
+		if(mysqli_errno())
 		{
 			$status = "error";
 			$message = "There was a problem with the database - please call your administrator";
@@ -621,10 +631,10 @@
 			mail($to, $subject, $emailmessage, $headers);
 
 			$content = "";
-			$userquery = mysql_query("SELECT * FROM dhdadmins ORDER BY ID ASC;");
+			$userquery = mysqli_query($my_link, "SELECT * FROM dhdadmins ORDER BY ID ASC;");
 			$content = "<table style='border-collapse:collapse;width:100%;'><tr class='headerrow'><td>username</td><td>first name</td><td>last name</td><td>email</td><td></td><td></td></tr>";
 			$count = 0;
-			while($row = mysql_fetch_assoc($userquery))
+			while($row = mysqli_fetch_assoc($userquery))
 			{
 				$count++;
 				$altclass = ($count % 2) ? "" : "altrow";
@@ -651,15 +661,19 @@
 				"content"	=> $content
 		);
 
+        mysqli_close($my_link);
+
 		echo json_encode($result);
 	}
 
 	function updateUser($P)
 	{
+        $my_link = connectToDb();
+
 		foreach($P as $key => $val)
 		{
 			$val = urldecode($val);
-			$val = mysql_real_escape_string($val);
+			$val = mysqli_real_escape_string($val);
 			$P[$key] = $val;
 		}
 
@@ -673,13 +687,13 @@
 		$message = "";
 		$content = "";
 
-		$update = mysql_query( "UPDATE dhdadmins
+		$update = mysqli_query($my_link, "UPDATE dhdadmins
 								SET dhduser='"  . $uname . "',
 									dhdfirst='" . $fname . "',
 									dhdlast='"  . $lname . "',
 									dhdemail='" . $email . "'
 								WHERE ID=" . $userid . ";");
-		if(mysql_errno())
+		if(mysqli_errno())
 		{
 			$status = "error";
 			$message = "There was a problem with the database - please call your administrator";
@@ -697,15 +711,19 @@
 				"content"	=> $content
 		);
 
+        mysqli_close($my_link);
+
 		echo json_encode($result);
 	}
 
 	function updatePassword($P)
 	{
+        $my_link = connectToDb();
+
 		foreach($P as $key => $val)
 		{
 			$val = urldecode($val);
-			$val = mysql_real_escape_string($val);
+			$val = mysqli_real_escape_string($val);
 			$P[$key] = $val;
 		}
 
@@ -717,14 +735,14 @@
 		$message = "";
 		$content = "";
 
-		$checkpass = mysql_fetch_assoc(mysql_query("SELECT ID FROM dhdadmins WHERE ID='" . $userid . "' AND dhdpass='" . md5($currpass) . "';"));
+		$checkpass = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT ID FROM dhdadmins WHERE ID='" . $userid . "' AND dhdpass='" . md5($currpass) . "';"));
 
 		if(isset($checkpass['ID']) && $checkpass['ID'] != "")
 		{
-			$update = mysql_query( "UPDATE dhdadmins
+			$update = mysqli_query($my_link, "UPDATE dhdadmins
 									SET dhdpass='"  . md5($newpass) . "'
 									WHERE ID=" . $userid . ";");
-			if(mysql_errno())
+			if(mysqli_errno())
 			{
 				$status = "error";
 				$message = "There was a problem with the database - please call your administrator";
@@ -747,15 +765,19 @@
 				"content"	=> $content
 		);
 
+        mysqli_close($my_link);
+
 		echo json_encode($result);
 	}
 
 
 	function getComicInfo($P)
 	{
+        $my_link = connectToDb();
+
 		$comicid = $P['comicid'];
 		$comicid = urldecode($comicid);
-		$comicid = mysql_real_escape_string($comicid);
+		$comicid = mysqli_real_escape_string($comicid);
 
 		$comic = getComicMeta($comicid);
 		$hover = getHover($comicid);
@@ -767,7 +789,7 @@
 		$csubtxt = "";
 
 		$name = "";
-		$comfile = mysql_fetch_assoc(mysql_query("SELECT meta_value FROM postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
+		$comfile = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT meta_value FROM postmeta WHERE post_id=" . $comic['ID'] . " AND meta_key='comic_file';"));
 
 		if(isset($comfile['meta_value']) && $comfile['meta_value'] != "")
 		{
@@ -824,44 +846,29 @@
 				)
 		);
 
-		echo json_encode($result);
+        mysqli_close($my_link);
 
-		/*
-		* == posts table ==
-		* post_author = user id
-		* post_content = subtext
-		* post_title = comic title / page title
-		* post_status = "publish"
-		* post_name = post_title without puncuation or spaces, spaces replaced with hyphens
-		* post_parent = 0
-		* post_type = "post"
-		* post_date = post_modified = TIMESTAMP
-		* post_date_gmt = post_modified_gmt = TIMESTAMP
-		* guid = http://thedoghousediaries.com/?p=NEW_COMIC_ID
-		*
-		* == postmeta table ==
-		* post_id = ID of comic just uploaded
-		* meta_key =>
-		* 		comic_file = file name
-		* 		comic_description = alt-text
-		*/
+        echo json_encode($result);
 	}
+
 
 	function getComicTable($P)
 	{
-		$firstload = (isset($P['firstload']) && !empty($P['firstload']) && $P['firstload'] == 1) ? 1 : 0;
+        $my_link = connectToDb();
 
-		$coms = mysql_query("SELECT ID, post_title, post_date, post_status, post_live_date
+        $firstload = (isset($P['firstload']) && !empty($P['firstload']) && $P['firstload'] == 1) ? 1 : 0;
+
+		$coms = mysqli_query($my_link, "SELECT ID, post_title, post_date, post_status, post_live_date
 							FROM posts
-							WHERE post_type='post' 
-								AND (post_status='publish' OR post_status='pending' OR post_status='inactive') 
+							WHERE post_type='post'
+								AND (post_status='publish' OR post_status='pending' OR post_status='inactive')
 							ORDER BY post_date DESC;");
-		$numrows = mysql_num_rows($coms);
+		$numrows = mysqli_num_rows($coms);
 		$comictablehtml = "";
 		$count = 0;
 		if($numrows > 0)
 		{
-			while($row = mysql_fetch_assoc($coms))
+			while($row = mysqli_fetch_assoc($coms))
 			{
 				$count++;
 				$altclass = ($count % 2) ? "mainrow" : "altrow";
@@ -877,7 +884,7 @@
 					$poststat = "pending";
 					$stattitl = " title='Live Date: " . substr($row['post_live_date'], 0, 10) . "'";
 				}
-				else 
+				else
 				{
 					$altclass = "inactiverow";
 					$poststat = "inactive";
@@ -902,15 +909,18 @@
 			$comictablehtml = "<tr class='mainrow'><td colspan='3'>No comics found!</td></tr>";
 		}
 
-		$status = "success";
+        $status = "success";
 		$message = "";
 		$result = array(
 				"status"	=> $status,
 				"message"	=> $message,
 				"content"	=> $comictablehtml
 		);
+        //error_log("BEFORE FOO AND RETURNING: " . print_r($result, true));
 
-		if($firstload){
+        mysqli_close($my_link);
+
+        if($firstload){
 			return $comictablehtml;
 		}
 		else{
@@ -920,17 +930,19 @@
 
 	function updateAnnouncement($P)
 	{
+        $my_link = connectToDb();
+
 		$text = $P['text'];
 		$text = urldecode($text);
-		$text = mysql_real_escape_string($text);
+		$text = mysqli_real_escape_string($text);
 
 		$aori = $P['active'];
 		$aori = urldecode($aori);
-		$aori = mysql_real_escape_string($aori);
+		$aori = mysqli_real_escape_string($aori);
 
 		$aori = ($aori == "active") ? 1 : 0;
 
-		$update_query = mysql_query("UPDATE dhdannouncements
+		$update_query = mysqli_query($my_link, "UPDATE dhdannouncements
 									 SET announcement='" . $text . "', active='" . $aori . "'
 									 WHERE ID=1;");
 		$status = "success";
@@ -941,12 +953,16 @@
 				"content"	=> ""
 		);
 
-		echo json_encode($result);
+        mysqli_close($my_link);
+
+        echo json_encode($result);
 	}
 
 	function getAnnouncementForm($P)
 	{
-		$announce = mysql_fetch_assoc(mysql_query("SELECT * FROM dhdannouncements;"));
+        $my_link = connectToDb();
+
+		$announce = mysqli_fetch_assoc(mysqli_query($my_link, "SELECT * FROM dhdannouncements;"));
 		$status = "success";
 		$message = "";
 		$result = array(
@@ -958,7 +974,9 @@
 					)
 				);
 
-		echo json_encode($result);
+        mysqli_close($my_link);
+
+        echo json_encode($result);
 	}
 
 	function getAnnouncementComic()
