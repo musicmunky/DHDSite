@@ -1,3 +1,3 @@
 logrotate state -- version 2
 "/var/log/httpd/error_log" 2014-8-15
-"/var/log/httpd/access_log" 2014-8-15
+"/var/log/httpd/requests_log" 2014-8-15

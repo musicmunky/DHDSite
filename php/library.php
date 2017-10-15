@@ -17,15 +17,16 @@
 	date_default_timezone_set('America/New_York');
 
 
-//	$webaddress = "http://thedoghousediaries.com/";
-	$webaddress = "http://104.131.12.172/";
-    $my_link = connectToDb();
+	$webaddress = "http://thedoghousediaries.com/";
+	//$webaddress = "http://104.131.12.172/";
 
 	if(isset($_POST['method']) && !empty($_POST['method']))
 	{
+		$my_link = connectToDb();
 		$method = $_POST['method'];
 		$method = urldecode($method);
 		$method = mysqli_real_escape_string($my_link, $method);
+		mysqli_close($my_link);
 
 		switch($method)
 		{
@@ -48,7 +49,6 @@
 			default: noFunction($_POST);
 				break;
 		}
-		mysqli_close($my_link);
 	}
 
 	function noFunction()
